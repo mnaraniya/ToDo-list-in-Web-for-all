@@ -71,6 +71,7 @@ app.get("/", function(req, res) {
 });
 
 app.get("/:custom", function(req, res){
+    
     const customListName = _.capitalize(req.params.custom);
     
     List.findOne({name: customListName}, function(err, foundList){
@@ -83,7 +84,7 @@ app.get("/:custom", function(req, res){
                 list.save();
                 res.redirect("/" + customListName);
             } else{
-                res.render("list", {listTitle: foundList.name, newListItems: foundList.items});
+                res.render("list", {listTitle1: day, listTitle: foundList.name, newListItems: foundList.items});
             }
         }
     });
