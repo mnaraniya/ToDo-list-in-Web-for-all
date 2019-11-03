@@ -4,6 +4,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+let uniqueSlug = require('unique-slug');
+
 
 const date = require(__dirname + "/date.js");
 
@@ -16,7 +18,7 @@ app.use(express.static("public"));
 
 const day = date.getDate();
 
-mongoose.connect("mongodb+srv://madmin:naraniya@cluster0-g1get.mongodb.net/todolistDB", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://madmin:naraniya@cluster0-g1get.mongodb.net/todolistDB", {useNewUrlParser: true, useUnifiedTopology: true});
 
 const itemSchema = {
     name: String
@@ -47,22 +49,25 @@ const List = mongoose.model("List", listSchema);
 
 app.get("/", function(req, res) {
     
-        Item.find({}, function(err, items){
-        
-        if(items.length === 0){
-            Item.insertMany(defaultItems, function(err){
-            if(err){
-            console.log(err);
-            } else{
-            console.log("Successfully saved default items in db!");
-                }
-            });
-            res.redirect("/");
-        } else{
-            res.render("list", {listTitle: day, newListItems: items});
-        }
-        
-    });
+    let randomSlug = uniqueSlug();
+    
+    res.redirect("/" + randomSlug);
+//        Item.find({}, function(err, items){
+//        
+//        if(items.length === 0){
+//            Item.insertMany(defaultItems, function(err){
+//            if(err){
+//            console.log(err);
+//            } else{
+//            console.log("Successfully saved default items in db!");
+//                }
+//            });
+//            res.redirect("/");
+//        } else{
+//            res.render("list", {listTitle: day, newListItems: items});
+//        }
+//        
+//    });
 });
 
 app.get("/:custom", function(req, res){

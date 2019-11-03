@@ -2,7 +2,7 @@ html {
   background-color: #E4E9FD;
   background-image: -webkit-linear-gradient(65deg, #A683E3 50%, #E4E9FD 50%);
   min-height: 1000px;
-  font-family: 'helvetica neue';
+  font-family: 'Arial';
 }
 
 h1 {
@@ -56,7 +56,7 @@ form.item {
   margin-left: 20px;
 }
 
-button {
+button[type="submit"] {
   min-height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -93,4 +93,14 @@ footer {
   color: white;
   color: rgba(0, 0, 0, 0.5);
   text-align: center;
+}
+
+a.linkBtn {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    color: white;
+    background-color: gray;
+    padding: 0.4em;
 }
